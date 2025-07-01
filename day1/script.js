@@ -9,6 +9,15 @@
 const express = require('express');
 const app = express();
 
+
+// Middleware in Express.js
+app.use((req, res, next) => {
+    console.log(`${req.method} request for '${req.url}'`);
+    next(); // Pass control to the next middleware function
+});
+app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
+
 // Routing in Express.js
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -16,10 +25,6 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.send('About Page');
 });
-
-// Middleware in Express.js
-app.use(express.json()); // Middleware to parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
 
 //Request and Response handling in Express.js
 app.post('/submit', (req, res) => {
